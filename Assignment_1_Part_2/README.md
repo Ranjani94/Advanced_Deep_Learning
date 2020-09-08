@@ -1,13 +1,13 @@
-# A Simple Semi-Supervised Learning Framework for Object Detection Reference:(https://arxiv.org/pdf/2005.04757.pdf)
+## A Simple Semi-Supervised Learning Framework for Object Detection Reference:(https://arxiv.org/pdf/2005.04757.pdf)
 
 STAC is a simple yet effective SSL framework for visual object detection along
 with a data augmentation strategy. STAC deploys highly confident pseudo labels of
 localized objects from an unlabeled image and updates the model by enforcing
 consistency via strong augmentation.
 
-<img src="docs/diagram.png" width="800">
+<img src="diagram.png" width="800">
 
-__This code is only used for research. This is not an official Google product.__
+
 
 
 # Instruction
