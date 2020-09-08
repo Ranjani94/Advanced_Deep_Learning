@@ -30,11 +30,11 @@ export VOCDIR=$DATAROOT/voc
 ### Check the tensorflow version
 python -c 'import tensorflow as tf; print(tf.__version__)'
 
-# install coco dataset using apis
+### install coco dataset using apis
 pip3 install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
 
 
-# Training
+### Training
 
 There are three steps:
 - __1.__ Train a standard detector on labeled data
@@ -48,7 +48,7 @@ pseudo labels to train a STAC detector
 The following example use labeled data as 10% train2017 and rest 90% train2017 data
 as unlabeled data.
 
-## Step 0: Set variables
+### Step 0: Set variables
 
 ```bash
 /detection
@@ -67,7 +67,7 @@ PSEUDO_PATH=${CKPT_PATH}/PSEUDO_DATA
 export CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7
 ```
 
-## Step 1: Train FasterRCNN on labeled data
+### Step 1: Train FasterRCNN on labeled data
 
 `. scripts/coco/train_stg1.sh`.
 
@@ -87,7 +87,7 @@ python3 train_stg1.py \
     TRAIN.AUGTYPE_LAB='default'
 ```
 
-## Step 2: Generate pseudo labels of unlabeled data
+### Step 2: Generate pseudo labels of unlabeled data
 
 `. scripts/coco/eval_stg1.sh`.
 
@@ -126,7 +126,7 @@ python3 predict.py \
     EVAL.PSEUDO_INFERENCE=True
 ```
 
-## Step 3: Train STAC
+### Step 3: Train STAC
 
 `. scripts/coco/train_stg2.sh`.
 
@@ -155,10 +155,10 @@ python3 train_stg2.py \
     TRAIN.WU=2
 ```
 
-## Tensorboard
+### Tensorboard
 
 All training logs and tensorboard info are under
-`${PRJROOT}/detection/train_log`. Visualize using
+`/detection/train_log`. Visualize using
 ```bash
-tensorboard --logdir=${PRJROOT}/detection/train_log
+tensorboard --logdir=/detection/train_log
 ```
