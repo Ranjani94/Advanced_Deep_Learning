@@ -19,4 +19,8 @@ Training the model and calculating the losses, training loss and validation loss
 
 ### Multiple Instance Learning
 
+A bag is constructed with a label 0 and 1. If a bag has even one digit, it is labeled as 1. A bag with all other numbers except one is labeled as 0. One bag can have 3 to 7 instances.
+
 Generate bag labels, bag indices, bag features from the extracted feature set from labeled dataset. Since our bag has different sizes, we need to pad each tensor to have the same shape (max: 7). We will look through each one instance and look at the shape of the tensor, and then we will pad 7-n to the existing tensor where n is the number of instances in the bag. The function will return a padded data set. Defining the model and used LeakyReLu as an activation function, dropout for the middle layer and softmax for the final layer.
+
+Got around 0.99 accuracy for the MNIST dataset using Multiple Instance Learning.
