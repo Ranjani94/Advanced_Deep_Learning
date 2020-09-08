@@ -1,6 +1,9 @@
-## A Simple Semi-Supervised Learning Framework for Object Detection Reference:(https://arxiv.org/pdf/2005.04757.pdf)
+## A Simple Semi-Supervised Learning Framework for Object Detection
+### Reference:(https://arxiv.org/pdf/2005.04757.pdf)
 
 #### Abstract:
+
+A semi-supervised learning is a learning technique which is often used when there is very less labeled data and a huge set of unlabeled data. The idea is to use the labeled dataset to label the unlabeled dataset. Semi supervised learnig is used to increase the perfomance of the machine learning models, but so far it has been used only for image classification task. In this paper, SSL is been applied to detect objects of unlabeled images. A new data augmentation strategy has been employed in this paper. The performance of semi supervised object detection is evaluated using the MS-COCO dataset and VOC07 dataset.
 
 
 <img src="object.png" width="800">
@@ -8,72 +11,39 @@
 
 
 
-# Instruction
-
-## Install dependencies
-
-### Set global enviroment variables.
+### Setting global enviroment variables.
 
 ```bash
 export PRJROOT=/path/to/your/project/directory/STAC
 export DATAROOT=/path/to/your/dataroot
 export COCODIR=$DATAROOT/coco
 export VOCDIR=$DATAROOT/voc
-export PYTHONPATH=$PYTHONPATH:${PRJROOT}/third_party/FasterRCNN:${PRJROOT}/third_party/auto_augment:${PRJROOT}/third_party/tensorpack
 ```
 
 ### Install virtual environment in the root folder of the project
 
-```bash
-cd ${PRJROOT}
+- sudo apt install python3-dev python3-virtualenv python3-tk imagemagick
+- virtualenv -p python3 --system-site-packages env3
+- . env3/bin/activate
+- pip install -r requirements.txt
 
-sudo apt install python3-dev python3-virtualenv python3-tk imagemagick
-virtualenv -p python3 --system-site-packages env3
-. env3/bin/activate
-pip install -r requirements.txt
-
-# Make sure your tensorflow version is 1.14 not only in virtual environment but also in
-# your machine, 1.15 can cause OOM issues.
+### Check the tensorflow version
 python -c 'import tensorflow as tf; print(tf.__version__)'
 
-# install coco apis
+# install coco dataset using apis
 pip3 install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
-```
 
-### (Optional) Install tensorpack
-
-__tensorpack with a compatible version is already included at
-third_party/tensorpack.__ `bash cd ${PRJROOT}/third_party pip install --upgrade
-git+https://github.com/tensorpack/tensorpack.git`
-
-## Download COCO/PASCAL VOC data and pre-trained models
-
-### Download data
-
-See [DATA.md](DATA.md)
-
-### Download backbone model
-
-```bash
-cd ${COCODIR}
-wget http://models.tensorpack.com/FasterRCNN/ImageNet-R50-AlignPadding.npz
-```
 
 # Training
 
 There are three steps:
 - __1.__ Train a standard detector on labeled data
-(`detection/scripts/coco/train_stg1.sh`).
+
 - __2.__ Predict pseudo boxes and labels of unlabeled
-data using the trained detector (`detection/scripts/coco/eval_stg1.sh`).
+data using the trained detector 
 - __3.__ Use labeled data and unlabeled data with
 pseudo labels to train a STAC detector
-(`detection/scripts/coco/train_stg2.sh`).
 
-Besides instruction at here, __`detection/scripts/coco/train_stac.sh`__
-provides a combined script to train STAC.
-
-__`detection/scripts/voc/train_stac.sh`__ is a combined script to train STAC on PASCAL VOC.
 
 The following example use labeled data as 10% train2017 and rest 90% train2017 data
 as unlabeled data.
@@ -81,7 +51,7 @@ as unlabeled data.
 ## Step 0: Set variables
 
 ```bash
-cd ${PRJROOT}/detection
+/detection
 
 # Labeled and Unlabeled datasets
 DATASET=coco_train2017.1@10
@@ -192,21 +162,3 @@ All training logs and tensorboard info are under
 ```bash
 tensorboard --logdir=${PRJROOT}/detection/train_log
 ```
-
-# Citation
-
-```
-@inproceedings{sohn2020detection,
-  title={A Simple Semi-Supervised Learning Framework for Object Detection},
-  author={Kihyuk Sohn and Zizhao Zhang and Chun-Liang Li and Han Zhang and Chen-Yu Lee and Tomas Pfister},
-  year={2020},
-  booktitle={arXiv:2005.04757}
-}
-```
-
-# Acknowledgement
-
--   [Tensorpack](https://github.com/tensorpack/tensorpack)
--   [FixMatch](https://github.com/google-research/fixmatch)
--   [RandAugment](https://github.com/tensorflow/tpu/tree/master/models/official/efficientnet)
--   [imgaug](https://github.com/aleju/imgaug)
