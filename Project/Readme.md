@@ -1,5 +1,5 @@
 
-## Improving Sentiment Analysis with Multi Task Learning of Negation
+## Improving Sentiment Analysis with Multi-task Learning of Negation
 
 ### Team Members
 
