@@ -7,3 +7,4 @@
 - Meta Learning with Reptile
 - MMOE Keras
 - Muti-task Learnig with BERT
+- Meta learning with SGD
