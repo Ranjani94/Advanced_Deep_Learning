@@ -1,4 +1,4 @@
-### Implemented th following algorithms:
+### Implemented the following algorithms:
 
 - Multi-task Learning
 - Meta Learning
