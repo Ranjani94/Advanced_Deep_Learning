@@ -11,3 +11,7 @@
 - Create classifier model using transformer layer
 - Fine-tuning models.
 - Training and Evaluation.
+
+## Accuracy
+
+Achieved an accuracy of 92% after 2 epochs and validation accuracy of 87%
